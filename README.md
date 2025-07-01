@@ -13,7 +13,7 @@ A modern Django CMS template built with Wagtail, featuring Docker containerizati
 - **Environment-based configuration** - Secure settings management with python-decouple
 - **Debug toolbar** - Enhanced development debugging (dev environment only)
 - **Testing framework** - pytest and pytest-django for robust testing
-- **Static file optimization** - ManifestStaticFilesStorage for cache-busting
+- **WhiteNoise** - Simplified static file serving for production
 
 ## Quick Start
 
@@ -121,6 +121,7 @@ WAGTAIL_SITE_NAME=Django Wagtail Template
 - **Wagtail 7.0.1** - Django-based CMS with rich editing experience
 - **PostgreSQL** - Advanced open-source relational database
 - **Gunicorn** - Python WSGI HTTP server for production
+- **Whitenoise** - Simplified static file serving for production
 
 ### Development Tools
 - **django-debug-toolbar** - In-browser debugging and profiling
