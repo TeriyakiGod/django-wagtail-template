@@ -2,3 +2,7 @@
 -r base.txt
 
 gunicorn==23.0.0
+
+# Self-hosted S3-compatible storage (MinIO)
+django-storages==1.14.4
+boto3==1.35.82

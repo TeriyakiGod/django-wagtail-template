@@ -86,6 +86,25 @@ WAGTAIL_SITE_NAME=Django Wagtail Template
 
 ## Deployment to CapRover
 
+### 1. Deploy MinIO for Media Storage
+
+First, create a MinIO instance for media file storage:
+
+1. **Create a new CapRover app** called `minio-storage`
+2. **Use Docker image**: `minio/minio:latest`
+3. **Set environment variables**:
+   ```env
+   MINIO_ROOT_USER=admin
+   MINIO_ROOT_PASSWORD=your-strong-password-here
+   ```
+4. **Set startup command**: `server /data --console-address ":9001"`
+5. **Add persistent directory**:
+   - Path in App: `/data`
+   - Label: `minio-data`
+6. **Enable HTTPS** and note your MinIO URL (e.g., `https://minio-storage.yourdomain.com`)
+
+### 2. Create Django App
+
 1. **Create a CapRover app**
    - Log in to your CapRover dashboard, create a new app, and name it (e.g., `django-wagtail-template`).
 
@@ -93,6 +112,7 @@ WAGTAIL_SITE_NAME=Django Wagtail Template
    - Add the following in the app's "Environment Variables" section:
       ```env
       DJANGO_SECRET_KEY=your-secret-key
+      DEBUG=False
       POSTGRES_DB=postgres
       POSTGRES_USER=postgres
       POSTGRES_PASSWORD=postgres
@@ -100,19 +120,36 @@ WAGTAIL_SITE_NAME=Django Wagtail Template
       POSTGRES_PORT=5432
       WAGTAIL_SITE_NAME=Django Wagtail Template
 
+      # MinIO Configuration
+      MINIO_ACCESS_KEY=admin
+      MINIO_SECRET_KEY=your-strong-password-here
+      MINIO_BUCKET_NAME=django-media
+      MINIO_ENDPOINT_URL=https://minio-storage.yourdomain.com
+      MINIO_USE_SSL=True
+
+      # Email Configuration
       EMAIL_HOST=smtp.gmail.com
       EMAIL_PORT=587
       EMAIL_USE_TLS=True
       EMAIL_HOST_USER=your-email@example.com
       EMAIL_HOST_PASSWORD=your-email-password
 
+      # Security Settings
       ALLOWED_HOSTS=yourdomain.com,localhost,127.0.0.1
       CSRF_TRUSTED_ORIGINS=https://yourdomain.com,https://subdomain.yourdomain.com
       WAGTAILADMIN_BASE_URL=https://yourdomain.com
       ```
 
-3. **Deploy via GitHub Actions**
-   - Configure `CAPROVER_SERVER`, `APP_NAME`, and `APP_TOKEN` as repository secrets. Push changes to trigger deployment.
+### 3. Create MinIO Bucket
+
+1. **Access MinIO Console**: Go to `https://minio-storage.yourdomain.com:9001`
+2. **Login** with your MinIO credentials
+3. **Create bucket** named `django-media` (or whatever you set in `MINIO_BUCKET_NAME`)
+4. **Set bucket policy** to allow public read access if needed
+
+### 4. Deploy via GitHub Actions
+
+Configure `CAPROVER_SERVER`, `APP_NAME`, and `APP_TOKEN` as repository secrets. Push changes to trigger deployment.
 
 ## Tech Stack
 
