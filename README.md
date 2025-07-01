@@ -4,11 +4,16 @@ A modern Django CMS template built with Wagtail, featuring Docker containerizati
 
 ## Features
 
-- **Wagtail CMS** - Powerful content management system
-- **PostgreSQL** - Production-ready database
+- **Wagtail CMS** - Powerful content management system with rich page editing
+- **PostgreSQL** - Production-ready database with full-text search
 - **Docker** - Containerized development and deployment
-- **Pre-commit hooks** - Code quality enforcement with Black formatter
-- **GitHub Actions** - Automated CI/CD pipeline
+- **Multi-environment setup** - Separate requirements for development and production
+- **Pre-commit hooks** - Code quality enforcement with Black, flake8, isort, and mypy
+- **GitHub Actions** - Automated CI/CD pipeline with CapRover deployment
+- **Environment-based configuration** - Secure settings management with python-decouple
+- **Debug toolbar** - Enhanced development debugging (dev environment only)
+- **Testing framework** - pytest and pytest-django for robust testing
+- **Static file optimization** - ManifestStaticFilesStorage for cache-busting
 
 ## Quick Start
 
@@ -66,12 +71,6 @@ A modern Django CMS template built with Wagtail, featuring Docker containerizati
    python manage.py runserver
    ```
 
-## Development
-
-- **Django Admin**: http://localhost:8000/django-admin/
-- **Wagtail Admin**: http://localhost:8000/admin/
-- **Search**: http://localhost:8000/search/
-
 ## Environment Variables
 
 Create a `.env` file with:
@@ -80,20 +79,63 @@ DJANGO_SECRET_KEY=your-secret-key
 POSTGRES_DB=postgres
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+WAGTAIL_SITE_NAME=Django Wagtail Template
 ```
 
-## Deployment
+## Deployment to CapRover
 
-The project includes automated deployment via GitHub Actions to CapRover. Configure the following secrets in your repository:
+1. **Create a CapRover app**
+   - Log in to your CapRover dashboard, create a new app, and name it (e.g., `django-wagtail-template`).
 
-- `CAPROVER_SERVER`
-- `APP_NAME`
-- `APP_TOKEN`
+2. **Set environment variables**
+   - Add the following in the app's "Environment Variables" section:
+      ```env
+      DJANGO_SECRET_KEY=your-secret-key
+      POSTGRES_DB=postgres
+      POSTGRES_USER=postgres
+      POSTGRES_PASSWORD=postgres
+      POSTGRES_HOST=postgres
+      POSTGRES_PORT=5432
+      WAGTAIL_SITE_NAME=Django Wagtail Template
+
+      EMAIL_HOST=smtp.gmail.com
+      EMAIL_PORT=587
+      EMAIL_USE_TLS=True
+      EMAIL_HOST_USER=your-email@example.com
+      EMAIL_HOST_PASSWORD=your-email-password
+
+      ALLOWED_HOSTS=yourdomain.com,localhost,127.0.0.1
+      CSRF_TRUSTED_ORIGINS=https://yourdomain.com,https://subdomain.yourdomain.com
+      WAGTAILADMIN_BASE_URL=https://yourdomain.com
+      ```
+
+3. **Deploy via GitHub Actions**
+   - Configure `CAPROVER_SERVER`, `APP_NAME`, and `APP_TOKEN` as repository secrets. Push changes to trigger deployment.
 
 ## Tech Stack
 
-- Django 5.2.3
-- Wagtail 7.0.1
-- PostgreSQL
-- Gunicorn
-- Docker & Docker Compose
+### Core Framework
+- **Django 5.2.3** - High-level Python web framework
+- **Wagtail 7.0.1** - Django-based CMS with rich editing experience
+- **PostgreSQL** - Advanced open-source relational database
+- **Gunicorn** - Python WSGI HTTP server for production
+
+### Development Tools
+- **django-debug-toolbar** - In-browser debugging and profiling
+- **python-decouple** - Separation of configuration from code
+- **pillow** - Python Imaging Library for image processing
+- **pytest & pytest-django** - Testing framework with Django integration
+
+### Code Quality
+- **pre-commit** - Git hooks for code quality
+- **Black** - Python code formatter
+- **flake8** - Python linting tool
+- **isort** - Import sorting utility
+- **mypy** - Static type checking
+
+### Infrastructure
+- **Docker & Docker Compose** - Containerization and orchestration
+- **GitHub Actions** - CI/CD automation
+- **CapRover** - Platform-as-a-Service deployment
