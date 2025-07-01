@@ -126,6 +126,7 @@ First, create a MinIO instance for media file storage:
       MINIO_BUCKET_NAME=django-media
       MINIO_ENDPOINT_URL=https://minio-storage.yourdomain.com
       MINIO_USE_SSL=True
+      MINIO_REGION_NAME=eu-east-1
 
       # Email Configuration
       EMAIL_HOST=smtp.gmail.com
