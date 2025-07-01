@@ -111,6 +111,10 @@ First, create a MinIO instance for media file storage:
 2. **Set environment variables**
    - Add the following in the app's "Environment Variables" section:
       ```env
+      # Django Settings Module
+      DJANGO_SETTINGS_MODULE=mysite.settings.production
+
+      # Core Settings
       DJANGO_SECRET_KEY=your-secret-key
       DEBUG=False
       POSTGRES_DB=postgres

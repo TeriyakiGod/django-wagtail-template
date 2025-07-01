@@ -3,7 +3,8 @@ FROM python:3.12-slim-bookworm
 EXPOSE 8000
 
 ENV PYTHONUNBUFFERED=1 \
-    PORT=8000
+    PORT=8000 \
+    DJANGO_SETTINGS_MODULE=mysite.settings.production
 
 # Install system packages required by Wagtail and Django.
 RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
