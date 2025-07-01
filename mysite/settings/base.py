@@ -205,3 +205,19 @@ WAGTAILDOCS_EXTENSIONS = [
     "xlsx",
     "zip",
 ]
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "loggers": {
+        "django.core.files.storage": {
+            "handlers": ["console"],
+            "level": "DEBUG",  # Or 'ERROR' for less verbose output
+        },
+    },
+}
