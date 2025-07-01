@@ -16,8 +16,8 @@ RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-r
  && rm -rf /var/lib/apt/lists/*
 
 # Install the project requirements.
-COPY requirements.txt /
-RUN pip install -r /requirements.txt
+COPY requirements/ /requirements/
+RUN pip install -r /requirements/production.txt
 
 # Use /app folder as a directory where the source code is stored.
 WORKDIR /app
@@ -28,4 +28,4 @@ COPY . .
 # Collect static files.
 RUN python manage.py collectstatic --noinput --clear
 
-CMD set -xe; gunicorn mysite.wsgi:application
+CMD set -xe; gunicorn mysite.wsgi:application --bind 0.0.0.0:$PORT --workers 3 --threads 2 --timeout 120
