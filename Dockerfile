@@ -25,7 +25,4 @@ WORKDIR /app
 # Copy the source code of the project into the container.
 COPY . .
 
-# Collect static files.
-RUN python manage.py collectstatic --noinput --clear
-
 CMD set -xe; gunicorn mysite.wsgi:application --bind 0.0.0.0:$PORT --workers 3 --threads 2 --timeout 120
