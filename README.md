@@ -23,14 +23,48 @@ A modern Django CMS template built with Wagtail, featuring Docker containerizati
    docker-compose up --build
    ```
 
-3. **Create a superuser**
+3. **Run migrations and collect static files**
+   ```bash
+   docker-compose exec web python manage.py migrate
+   docker-compose exec web python manage.py collectstatic --noinput
+   ```
+
+4. **Create a superuser**
    ```bash
    docker-compose exec web python manage.py createsuperuser
    ```
 
-4. **Access the application**
+5. **Access the application**
    - Website: http://localhost:8000
    - Admin: http://localhost:8000/admin
+
+## Local Development (without Docker)
+
+1. **Start the database**
+   ```bash
+   docker-compose up db
+   ```
+
+2. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Run migrations and collect static files**
+   ```bash
+   python manage.py migrate
+   python manage.py collectstatic --noinput
+   ```
+
+4. **Create a superuser**
+   ```bash
+   python manage.py createsuperuser
+   ```
+
+5. **Run the development server**
+   ```bash
+   python manage.py runserver
+   ```
 
 ## Development
 
