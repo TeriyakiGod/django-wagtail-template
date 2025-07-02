@@ -17,10 +17,15 @@ EMAIL_USE_TLS = config("EMAIL_USE_TLS", default=True, cast=bool)
 EMAIL_HOST_USER = config("EMAIL_HOST_USER", default="")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="")
 
-# MinIO Configuration for Media Files
 INSTALLED_APPS += ["storages"]
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 # MinIO Settings
 AWS_ACCESS_KEY_ID = config("MINIO_ACCESS_KEY")
 AWS_SECRET_ACCESS_KEY = config("MINIO_SECRET_KEY")
