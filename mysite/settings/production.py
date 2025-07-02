@@ -1,6 +1,7 @@
 from decouple import Csv, config
 
 from .base import *  # noqa: F403, F401
+from .base import INSTALLED_APPS
 
 DEBUG = False
 
@@ -17,6 +18,7 @@ EMAIL_HOST_USER = config("EMAIL_HOST_USER", default="")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="")
 
 # MinIO Configuration for Media Files
+INSTALLED_APPS += ["storages"]
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 # MinIO Settings
