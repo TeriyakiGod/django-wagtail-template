@@ -143,6 +143,8 @@ First, create a MinIO instance for media file storage:
       ALLOWED_HOSTS=yourdomain.com,localhost,127.0.0.1
       CSRF_TRUSTED_ORIGINS=https://yourdomain.com,https://subdomain.yourdomain.com
       WAGTAILADMIN_BASE_URL=https://yourdomain.com
+
+      LOG_LEVEL=info
       ```
 
 ### 3. Create MinIO Bucket
