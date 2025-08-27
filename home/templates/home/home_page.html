@@ -1,21 +1,28 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
-{% block body_class %}template-homepage{% endblock %}
+{% block body_class %}homepage{% endblock %}
 
 {% block extra_css %}
-
-{% comment %}
-Delete the line below if you're just getting started and want to remove the welcome screen!
-{% endcomment %}
-<link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
+	{% comment %}
+	Add any extra CSS files you want to include for this template here.
+	{% endcomment %}
 {% endblock extra_css %}
 
 {% block content %}
-
-{% comment %}
-Delete the line below if you're just getting started and want to remove the welcome screen!
-{% endcomment %}
-{% include 'home/welcome_page.html' %}
-
+	<div class="hero container text-center my-5">
+		<h1>{{ page.hero_title }}</h1>
+		<p>{{ page.hero_text }}</p>
+		{% image page.hero_image width-1920 class="img-fluid w-100 d-block" %}
+		{% if page.hero_cta_link %}
+			<a href="{% pageurl page.hero_cta_link %}">
+				<button class="btn btn-primary my-3 w-100">
+					{% firstof page.hero_cta page.hero_cta_link.title %}
+				</button>
+			</a>
+		{% endif %}
+	</div>
+	<div class="container my-2">
+		{{ page.body|richtext }}
+	</div>
 {% endblock content %}
