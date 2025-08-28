@@ -1,0 +1,13 @@
+<footer class="container py-4">
+    {% comment %} <p class="text-center">Footer&nbsp;&copy;&nbsp;2025</p> {% endcomment %}
+
+    {% with links=settings.base.NavigationSettings.links %}
+        {% if links %}
+            {% for link in links %}
+                <a href="{{ link.value.url }}">
+                    <span><i class="{{ link.value.icon }} mx-2"></i>{{ link.value.name }}</span>
+                </a>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</footer>
