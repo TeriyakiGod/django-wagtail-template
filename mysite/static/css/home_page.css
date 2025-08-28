@@ -1,0 +1,24 @@
+/* Hero section background image styling */
+.hero {
+  height: 200px; /* desired banner height */
+  background-size: cover; /* crop to fill */
+  background-position: center; /* center focal point */
+  background-repeat: no-repeat;
+  display: flex; /* vertically center text/button */
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Optional: tighten inner spacing for small banners */
+.hero h1,
+.hero p {
+  margin-bottom: 0.25rem;
+}
+
+.hero-btn {
+  @media screen and (max-width: 640px) {
+    width: 100%;
+    display: inline-block;
+    box-sizing: border-box;
+  }
+}

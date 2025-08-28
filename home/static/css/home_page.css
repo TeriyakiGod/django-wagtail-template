@@ -1,0 +1,7 @@
+@media (max-width: 640px) {
+  .hero-btn {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+  }
+}
