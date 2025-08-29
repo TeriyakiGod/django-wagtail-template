@@ -1,24 +1,32 @@
+from django.db import models
 from wagtail import blocks
-from wagtail.admin.panels import FieldPanel
-from wagtail.contrib.settings import models as settings_models
-from wagtail.fields import StreamField
+from wagtail.admin.panels import FieldPanel, PublishingPanel
+from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
+from wagtail.fields import RichTextField, StreamField
+from wagtail.models import (
+    DraftStateMixin,
+    PreviewableMixin,
+    RevisionMixin,
+    TranslatableMixin,
+)
+from wagtail.snippets.models import register_snippet
 
 
-@settings_models.register_setting
-class NavigationSettings(settings_models.BaseGenericSetting):
+@register_setting
+class NavigationSettings(BaseGenericSetting):
     links = StreamField(
         [
             (
                 "link",
                 blocks.StructBlock(
                     [
+                        ("name", blocks.CharBlock(required=True)),
                         (
                             "icon",
                             blocks.CharBlock(
                                 required=True, help_text="Icon name or CSS class"
                             ),
                         ),
-                        ("name", blocks.CharBlock(required=True)),
                         ("url", blocks.URLBlock(required=True)),
                     ]
                 ),
@@ -31,3 +39,32 @@ class NavigationSettings(settings_models.BaseGenericSetting):
     panels = [
         FieldPanel("links"),
     ]
+
+
+@register_snippet
+class FooterText(
+    DraftStateMixin,
+    RevisionMixin,
+    PreviewableMixin,
+    TranslatableMixin,
+    models.Model,
+):
+
+    body = RichTextField()
+
+    panels = [
+        FieldPanel("body"),
+        PublishingPanel(),
+    ]
+
+    def __str__(self):
+        return "Footer text"
+
+    def get_preview_template(self, request, mode_name):
+        return "base.html"
+
+    def get_preview_context(self, request, mode_name):
+        return {"footer_text": self.body}
+
+    class Meta(TranslatableMixin.Meta):
+        verbose_name_plural = "Footer Text"

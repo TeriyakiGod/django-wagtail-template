@@ -8,21 +8,21 @@
 {% endblock extra_css %}
 
 {% block content %}
-	{% image page.hero_image fill-400x200 as hero_bg %}
-	<div class="hero container text-center text-light my-5" style="background-image: url('{{ hero_bg.url }}');">
+	<div class="bg-primary-subtle container-fluid text-center my-5 py-2">
+		{% image page.hero_image fill-300x200 class="my-4" %}
 		<h1>{{ page.hero_title }}</h1>
 		<p>{{ page.hero_text }}</p>
 		{% if page.hero_cta_link %}
-			<div>
+			<div class="my-4">
 				<a href="{% pageurl page.hero_cta_link %}">
-					<button class="hero-btn btn btn-primary my-3">
+					<button class="hero-btn btn btn-primary">
 						{% firstof page.hero_cta page.hero_cta_link.title %}
 					</button>
 				</a>
 			</div>
 		{% endif %}
 	</div>
-	<div class="container my-2">
+	<div class="container-fluid my-5 px-5">
 		{{ page.body|richtext }}
 	</div>
 {% endblock content %}

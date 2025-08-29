@@ -1,5 +1,7 @@
-<footer class="container py-4 bg-primary-subtle">
-    {% comment %} <p class="text-center">Footer&nbsp;&copy;&nbsp;2025</p> {% endcomment %}
+{% load navigation_tags %}
+
+<footer class="container-fluid py-4 bg-primary-subtle">
+    {% get_footer_text %}
 
     {% with links=settings.base.NavigationSettings.links %}
         {% if links %}
