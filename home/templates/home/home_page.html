@@ -9,7 +9,7 @@
 
 {% block content %}
 	<div class="bg-primary-subtle container-fluid text-center my-5 py-2">
-		{% image page.hero_image fill-300x200 class="my-4" %}
+		{% image page.hero_image min-200x200 class="my-4" %}
 		<h1>{{ page.hero_title }}</h1>
 		<p>{{ page.hero_text }}</p>
 		{% if page.hero_cta_link %}
