@@ -6,13 +6,15 @@ from . import blocks
 
 
 class ModularPage(Page):
-    content = fields.StreamField(
+    body = fields.StreamField(
         [
-            ("section", blocks.SectionBlock()),
+            ("markdown_section", blocks.MarkdownSectionBlock()),
+            ("html_section", blocks.HTMLSectionBlock()),
+            ("richtext_section", blocks.RichTextSectionBlock()),
         ],
         blank=True,
     )
 
     content_panels = Page.content_panels + [
-        panels.FieldPanel("content"),
+        panels.FieldPanel("body"),
     ]

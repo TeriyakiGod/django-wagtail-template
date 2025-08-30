@@ -1,0 +1,5 @@
+{% load wagtailmarkdown %}
+
+<div class="container-fluid p-5 {{ self.bg_color|default:'bg-body' }} {{ self.text_color|default:'text-body' }}">
+    {{self.content|markdown}}
+</div>
