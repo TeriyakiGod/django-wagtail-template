@@ -35,6 +35,7 @@ ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="localhost,127.0.0.1", cast=Csv(
 INSTALLED_APPS = [
     "home",
     "base",
+    "modular",
     "search",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
     "wagtail.search",
     "wagtail.admin",
     "wagtail",
+    "wagtailmarkdown",
     "modelcluster",
     "taggit",
     "django_filters",

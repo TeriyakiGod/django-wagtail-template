@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load wagtailmarkdown wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}modular bg-body{% endblock %}
+
+{% block extra_css %}
+
+{% endblock extra_css %}
+
+{% block content %}
+	{% for section in self.content %}
+        <div class="container-fluid p-5 {{ section.value.bg_color|default:'bg-body' }}">
+            {{section.value.content|markdown}}
+        </div>
+    {% endfor %}
+{% endblock content %}
